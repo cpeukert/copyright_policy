@@ -323,7 +323,7 @@ with st.expander("About this dashboard", expanded=False):
     It is an **interactive illustration** of an economic model that links copyright policy to the supply of AI training data and, ultimately, to welfare. It’s designed to help **policymakers** and advisors build intuition about the **trade-offs** across policy options.
 
     > **Not a quantification exercise.**  
-    > The results here are **not** precise forecasts. Key parameters (how much existing data contributes to AI quality, how costly new creation is, how strongly royalties distort prices, etc.) are **extremely hard to measure empirically** and can vary by sector and over time. Treat the charts as **scenario analysis** that shows directions and sensitivities, not fixed numbers.
+    > The results here are **not** precise forecasts. Key parameters are **hard to measure empirically** and can vary by sector and over time. Treat the charts as **scenario analysis** that shows directions and sensitivities, not fixed numbers.
 
     ---
 
@@ -331,23 +331,23 @@ with st.expander("About this dashboard", expanded=False):
 
     AI systems learn from large corpora of copyrighted and non-copyrighted works. EU policy choices revolve around *how* those works may be used for training and *how* to finance new creation if training reduces creators’ incentives. Four stylised regimes are compared:
 
-    - **AI exception** — all existing stock is usable for training **without compensation**. Maximises coverage of existing data, but offers **no funding** for new works.
-    - **Statutory licence** — all stock is usable, and AI firms pay a **regulated royalty** that funds creators (net of admin costs). Keeps coverage high and can **restore** or **expand** new creation if the royalty is large enough.
-    - **Opt-in** — works are excluded by default; rightsholders must **grant access** (often tied to a negotiated royalty). Coverage depends on participation; funding exists if royalties are paid.
-    - **Opt-out** — works are included by default; rightsholders can **withdraw** (often with **no royalty** in practice). Coverage is high; funding for new creation is typically **absent**.
+    - **AI exception** — all existing stock is usable for training **without compensation**. Maximises coverage of existing data, but offers **no funding** for new works.  
+    - **Statutory licence** — all stock is usable, and AI firms pay a **regulated royalty** that funds creators (net of admin costs). Keeps coverage high and can **restore** or **expand** new creation if the royalty is large enough.  
+    - **Opt-in** — works are excluded by default; rightsholders must **grant access** (often tied to a negotiated royalty). Coverage depends on participation; funding exists if royalties are paid.  
+    - **Opt-out** — works are included by default; rightsholders can **withdraw** (often with **no royalty** in practice). Coverage is high; funding for new creation is typically **absent**.  
 
     ---
 
     ### Economic intuition of the model
 
     - **Value of AI to users** depends on two inputs:  
-    (1) the **stock** of existing works included in training; and  
-    (2) the **flow** of newly created works going forward.
-    - Excluding stock lowers AI quality disproportionately when representativeness matters (captured by the **coverage penalty** γ).
+      (1) the **stock** of existing works included in training; and  
+      (2) the **flow** of newly created works going forward.  
+    - Excluding stock lowers AI quality disproportionately when representativeness matters (captured by the **coverage penalty** γ).  
     - **Royalties** (ad valorem rate *r* on sales) do two things:  
-    • **distort prices/quantities** in the AI market (a cost); and  
-    • create a **funding pool** (after leakage τ) that can **restore incentives** for new creation above the suppressed baseline.
-    - New creation faces **convex costs** (φ, ψ). Funding must cover the **incremental** cost relative to the no-funding baseline.
+      • **distort prices/quantities** in the AI market (a cost); and  
+      • create a **funding pool** (after leakage τ) that can **restore incentives** for new creation above the suppressed baseline.  
+    - New creation faces **convex costs** (φ, ψ). Funding must cover the **incremental** cost relative to the no-funding baseline.  
     - **Welfare** = consumer surplus + AI-firm profit − admin leakage − incremental creation cost. Transfers to creators are **distributional**; they matter for incentives only insofar as they finance new works.
 
     **Key trade-off:** A higher *r* can **raise future value** (by financing more new works) but **reduces current surplus** (through price distortions and leakage). The welfare-maximising *r*—when it exists—balances these forces and may be zero if dynamic gains are weak or the wedge is too costly.
@@ -356,16 +356,42 @@ with st.expander("About this dashboard", expanded=False):
 
     ### How to use the dashboard
 
-    - Pick a **Scenario** (preset assumptions) and adjust parameters in the **left sidebar**:
-    - **γ (coverage penalty)** — how much AI quality drops when fewer works are included.  
-    - **κ (pass-through / conduct)** — how strongly royalties distort prices and quantities.  
-    - **τ / τ_in (admin leakage)** — how much of the royalty is lost in administration.  
-    - **μ, α (returns to new data)** — how much additional new works raise AI value and with what diminishing returns.  
-    - **φ, ψ (creation costs)** — level and curvature of costs for producing new works.  
-    - **δ, x_in, x_out** — creators’ perceived effects and action costs shaping opt-in/opt-out participation.
-    - The **top bar chart** compares **welfare and its components** across regimes under your current parameters; detailed regime plots and tables follow below.
+    - Pick a **Scenario** (preset assumptions) or adjust parameters directly in the **left sidebar**:
 
-    *Interpretation tip:* If raising *r* barely changes welfare, it usually means either (i) the revenue wedge is very costly (high κ or τ), or (ii) the dynamic payoff from more data is small (low μ or very high ψ). If welfare improves with *r*, your scenario implies that **funding new creation** outweighs **distortion/leakage** costs.
+    **Structural parameters**  
+    - **Dₛ (stock of existing works)** — how much data already exists and could be used for training.  
+    - **B (demand slope)** — how sensitive demand is to changes in price; steeper slope means users stop buying quickly when prices rise.  
+    - **φ (flow cost scale)** — the basic “costliness” of creating new works; higher values mean it is more expensive to generate additional data.  
+    - **ψ (flow cost curvature)** — how costs accelerate as more works are created; higher values mean costs rise disproportionately.  
+    - **κ (pass-through)** — how much royalties increase end-user prices; a higher κ means users bear more of the royalty burden.  
+    - **τ (admin leakage, statutory & opt-out)** — share of royalties lost in the system (e.g., collection costs); money that never reaches creators.  
+    - **γ (coverage penalty)** — how much AI quality suffers when fewer works are included; higher values mean representativeness matters more.  
+
+    **Harms & action costs**  
+    - **δ (harm/benefit from inclusion)** — creators’ perceived net effect of being included in training; positive = harm, negative = benefit.  
+    - **x_in (opt-in action cost)** — the effort/cost a creator faces to actively allow training use.  
+    - **x_out (opt-out action cost)** — the effort/cost a creator faces to actively withdraw from training use.  
+
+    **Flow baselines**  
+    - **λ (stock depreciation)** — how quickly old data becomes less useful or obsolete.  
+    - **m (maintenance elasticity)** — how much keeping the flow of new works up matters for sustaining AI quality.  
+    - **δ_f (suppressed share)** — fraction of potential new works that disappear in the absence of proper funding.  
+
+    **Search / solution settings**  
+    - **r_max** — the maximum royalty rate the model will search over when finding the welfare optimum.  
+
+    **Bargaining (opt-in only)**  
+    - **β (creators’ bargaining power)** — how much weight creators have relative to AI firms in negotiations.  
+    - **τ_in (admin leakage, opt-in)** — share of royalties lost in administration specifically for opt-in agreements.  
+
+    **Aggregation**  
+    - **N (adult population, millions)** — size of the potential market.  
+    - **n (AI adoption share)** — fraction of people actually using the AI system.  
+    - **months** — the time period results are scaled to.  
+    - These three together define the **scale factor** that translates model results into population-level values.  
+
+    **Export**  
+    - Save charts and tables to **CSV, LaTeX, or PDF/SVG/PNG** for further use.  
 
     ---
 
@@ -386,6 +412,7 @@ with st.expander("About this dashboard", expanded=False):
     [www.digital-markets.ch](https://www.digital-markets.ch)
     """
     )
+
 
 # ---- Sidebar
 
